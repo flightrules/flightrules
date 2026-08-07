@@ -140,6 +140,9 @@ def cmd_install(project, names, settings_path, dry_run, backup):
     for name in names:
         dest = target_dir / f"{name}.py"
         shutil.copy2(HOOKS_DIR / name / "hook.py", dest)
+        # Zip extraction (Python zipfile, macOS Archive Utility) drops the
+        # exec bit, so guarantee it here instead of trusting the source.
+        dest.chmod(dest.stat().st_mode | 0o755)
         print(f"installed {dest.relative_to(project)}")
     write_settings(settings_path, settings, backup)
     print(f"updated {settings_path.relative_to(project)} "
