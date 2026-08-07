@@ -1,0 +1,16 @@
+{
+  "name": "Read of a .pem key is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/etc/certs/server.pem"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny"
+    }
+  }
+}

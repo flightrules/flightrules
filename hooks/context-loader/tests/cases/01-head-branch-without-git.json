@@ -1,0 +1,22 @@
+{
+  "name": "branch comes from .git/HEAD even when git commands fail (PATH empty)",
+  "stdin": {
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  "fixture": {
+    "files": {
+      ".git/HEAD": "ref: refs/heads/main\n"
+    }
+  },
+  "env": {
+    "PATH": "/nonexistent-fr-no-git"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.hookEventName": "SessionStart"
+    },
+    "stdout_contains": "branch: main"
+  }
+}

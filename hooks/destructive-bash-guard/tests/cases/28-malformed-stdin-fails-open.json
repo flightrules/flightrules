@@ -1,0 +1,8 @@
+{
+  "name": "invalid JSON stdin exits 0 silently (fail open)",
+  "stdin_raw": "rm -rf / this is not json{{{",
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

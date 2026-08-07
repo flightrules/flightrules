@@ -1,0 +1,13 @@
+{
+  "name": "danger hidden behind && in a chained command is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "npm ci && rm -rf .."}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "escapes the session working directory"
+  }
+}

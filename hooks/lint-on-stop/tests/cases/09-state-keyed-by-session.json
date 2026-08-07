@@ -1,0 +1,25 @@
+{
+  "name": "loop-guard state is per session: another session's counter is ignored",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-09"
+  },
+  "env": {
+    "FR_LINT_CMD": "false",
+    "FR_STATE_DIR": "."
+  },
+  "fixture": {
+    "files": {
+      "fr-lint-on-stop-sess-other.count": "2"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "decision": "block"
+    },
+    "file_contains": {
+      "fr-lint-on-stop-sess-09.count": "1"
+    }
+  }
+}

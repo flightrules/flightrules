@@ -1,0 +1,21 @@
+{
+  "name": "no lint command detectable: allow silently, run nothing",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-03"
+  },
+  "env": {
+    "FR_LINT_CMD": "",
+    "FR_STATE_DIR": "."
+  },
+  "fixture": {
+    "files": {
+      "package.json": "{\"name\": \"demo\", \"scripts\": {\"test\": \"jest\"}}",
+      "pyproject.toml": "[project]\nname = \"demo\"\n"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

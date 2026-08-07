@@ -1,0 +1,14 @@
+{
+  "name": "no FR_NOTIFY_CMD and no notifier on PATH exits 0 silently",
+  "stdin": {
+    "hook_event_name": "Notification",
+    "message": "anyone listening?"
+  },
+  "env": {
+    "PATH": "/nonexistent"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

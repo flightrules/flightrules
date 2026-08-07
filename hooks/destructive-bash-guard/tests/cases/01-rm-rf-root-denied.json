@@ -1,0 +1,16 @@
+{
+  "name": "rm -rf / is denied with structured JSON",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -rf /"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny",
+      "hookSpecificOutput.hookEventName": "PreToolUse"
+    },
+    "stdout_contains": "rm-recursive-force"
+  }
+}

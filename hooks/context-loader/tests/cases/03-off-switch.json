@@ -1,0 +1,19 @@
+{
+  "name": "FR_CONTEXT_OFF=1 disables the loader",
+  "stdin": {
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  "fixture": {
+    "files": {
+      ".git/HEAD": "ref: refs/heads/main\n"
+    }
+  },
+  "env": {
+    "FR_CONTEXT_OFF": "1"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

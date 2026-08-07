@@ -1,0 +1,19 @@
+{
+  "name": "detached HEAD reported with short hash",
+  "stdin": {
+    "hook_event_name": "SessionStart",
+    "source": "resume"
+  },
+  "fixture": {
+    "files": {
+      ".git/HEAD": "1a2b3c4d5e6f1a2b3c4d5e6f1a2b3c4d5e6f1a2b\n"
+    }
+  },
+  "env": {
+    "PATH": "/nonexistent-fr-no-git"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_contains": "detached HEAD at 1a2b3c4d5e6f"
+  }
+}

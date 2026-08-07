@@ -1,0 +1,25 @@
+{
+  "name": "one prior block in this session: still blocks, counter reaches 2",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-06"
+  },
+  "env": {
+    "FR_LINT_CMD": "false",
+    "FR_STATE_DIR": "."
+  },
+  "fixture": {
+    "files": {
+      "fr-lint-on-stop-sess-06.count": "1"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "decision": "block"
+    },
+    "file_contains": {
+      "fr-lint-on-stop-sess-06.count": "2"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "FR_DESTRUCTIVE_ALLOW with the only matching pattern allows the command",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -rf /opt/data"}
+  },
+  "env": {"FR_DESTRUCTIVE_ALLOW": "rm-recursive-force:disk-redirect"},
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

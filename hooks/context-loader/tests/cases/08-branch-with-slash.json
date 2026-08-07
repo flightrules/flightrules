@@ -1,0 +1,19 @@
+{
+  "name": "branch names containing slashes survive HEAD parsing",
+  "stdin": {
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  "fixture": {
+    "files": {
+      ".git/HEAD": "ref: refs/heads/feature/login-flow\n"
+    }
+  },
+  "env": {
+    "PATH": "/nonexistent-fr-no-git"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_contains": "branch: feature/login-flow"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "FR_DESTRUCTIVE_ALLOW skips the named pattern, others still fire",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -rf /opt/data && mkfs.ext4 /dev/sdb1"}
+  },
+  "env": {"FR_DESTRUCTIVE_ALLOW": "rm-recursive-force"},
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "[mkfs]"
+  }
+}

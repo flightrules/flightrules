@@ -1,0 +1,21 @@
+{
+  "name": "passing lint resets the loop-guard counter",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-08"
+  },
+  "env": {
+    "FR_LINT_CMD": "true",
+    "FR_STATE_DIR": "."
+  },
+  "fixture": {
+    "files": {
+      "fr-lint-on-stop-sess-08.count": "2"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true,
+    "file_absent": ["fr-lint-on-stop-sess-08.count"]
+  }
+}

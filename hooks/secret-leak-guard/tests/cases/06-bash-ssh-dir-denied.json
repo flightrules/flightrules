@@ -1,0 +1,16 @@
+{
+  "name": "Bash grep in ~/.ssh/ is denied via path fragment",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "grep -r host ~/.ssh/id_rsa"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny"
+    }
+  }
+}

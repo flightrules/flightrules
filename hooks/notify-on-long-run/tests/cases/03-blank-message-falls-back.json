@@ -1,0 +1,17 @@
+{
+  "name": "whitespace-only message falls back to the default text",
+  "stdin": {
+    "hook_event_name": "Notification",
+    "message": "   "
+  },
+  "env": {
+    "FR_NOTIFY_CMD": "printf '%s' {message} > notify.txt"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true,
+    "file_contains": {
+      "notify.txt": "Claude Code needs your attention"
+    }
+  }
+}

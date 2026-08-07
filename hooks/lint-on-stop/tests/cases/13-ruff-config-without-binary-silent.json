@@ -1,0 +1,21 @@
+{
+  "name": "ruff.toml present but ruff binary not on PATH: allow silently",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-13"
+  },
+  "env": {
+    "FR_LINT_CMD": "",
+    "FR_STATE_DIR": ".",
+    "PATH": "/nonexistent-fr-test"
+  },
+  "fixture": {
+    "files": {
+      "ruff.toml": "line-length = 100\n"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

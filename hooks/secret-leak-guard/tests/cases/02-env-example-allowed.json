@@ -1,0 +1,14 @@
+{
+  "name": ".env.example passes silently",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "{CWD}/.env.example"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

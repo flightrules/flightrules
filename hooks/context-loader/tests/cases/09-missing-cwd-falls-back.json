@@ -1,0 +1,16 @@
+{
+  "name": "stdin without cwd falls back to process cwd",
+  "stdin_raw": "{\"hook_event_name\": \"SessionStart\", \"source\": \"startup\"}",
+  "fixture": {
+    "files": {
+      ".git/HEAD": "ref: refs/heads/fallback-cwd\n"
+    }
+  },
+  "env": {
+    "PATH": "/nonexistent-fr-no-git"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_contains": "branch: fallback-cwd"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "FR_LINT_OFF=1 disables the hook even with a failing lint",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-04"
+  },
+  "env": {
+    "FR_LINT_OFF": "1",
+    "FR_LINT_CMD": "false",
+    "FR_STATE_DIR": "."
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

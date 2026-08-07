@@ -1,0 +1,20 @@
+{
+  "name": ".git pointer file (worktree/submodule) resolves to the real HEAD",
+  "stdin": {
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  "fixture": {
+    "files": {
+      ".git": "gitdir: real-gitdir\n",
+      "real-gitdir/HEAD": "ref: refs/heads/wt-branch\n"
+    }
+  },
+  "env": {
+    "PATH": "/nonexistent-fr-no-git"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_contains": "branch: wt-branch"
+  }
+}

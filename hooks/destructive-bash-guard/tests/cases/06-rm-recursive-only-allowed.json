@@ -1,0 +1,12 @@
+{
+  "name": "rm -r without -f does not match (both flags required)",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -r /tmp/scratch-dir"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

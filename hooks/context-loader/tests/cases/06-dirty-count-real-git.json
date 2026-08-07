@@ -1,0 +1,27 @@
+{
+  "name": "dirty file count via real git on minimal repo (requires git on PATH)",
+  "stdin": {
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  "fixture": {
+    "files": {
+      ".git/HEAD": "ref: refs/heads/main\n",
+      ".git/objects/.keep": "",
+      ".git/refs/.keep": "",
+      "a.txt": "alpha\n",
+      "b.txt": "beta\n"
+    }
+  },
+  "env": {
+    "GIT_CONFIG_GLOBAL": "/dev/null",
+    "GIT_CONFIG_SYSTEM": "/dev/null"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.hookEventName": "SessionStart"
+    },
+    "stdout_contains": "dirty files: 2"
+  }
+}

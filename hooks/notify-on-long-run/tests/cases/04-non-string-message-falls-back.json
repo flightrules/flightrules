@@ -1,0 +1,17 @@
+{
+  "name": "non-string message field falls back to the default text",
+  "stdin": {
+    "hook_event_name": "Notification",
+    "message": 42
+  },
+  "env": {
+    "FR_NOTIFY_CMD": "printf '%s' {message} > notify.txt"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true,
+    "file_contains": {
+      "notify.txt": "Claude Code needs your attention"
+    }
+  }
+}

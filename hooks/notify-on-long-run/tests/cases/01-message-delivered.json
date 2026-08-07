@@ -1,0 +1,17 @@
+{
+  "name": "stdin message reaches the notify command with the fixed title",
+  "stdin": {
+    "hook_event_name": "Notification",
+    "message": "Claude needs your permission to use Bash"
+  },
+  "env": {
+    "FR_NOTIFY_CMD": "printf '%s|%s' {title} {message} > notify.txt"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true,
+    "file_contains": {
+      "notify.txt": "Claude Code|Claude needs your permission to use Bash"
+    }
+  }
+}

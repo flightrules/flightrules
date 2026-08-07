@@ -1,0 +1,13 @@
+{
+  "name": "git push --force origin main is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "git push --force origin main"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "git-force-push"
+  }
+}

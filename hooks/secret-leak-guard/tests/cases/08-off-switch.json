@@ -1,0 +1,17 @@
+{
+  "name": "FR_SECRET_GUARD_OFF=1 disables the guard",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "{CWD}/.env"
+    }
+  },
+  "env": {
+    "FR_SECRET_GUARD_OFF": "1"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

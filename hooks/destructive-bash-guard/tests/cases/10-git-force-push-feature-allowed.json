@@ -1,0 +1,12 @@
+{
+  "name": "git push -f to a feature branch is allowed",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "git push -f origin fix/rebase-cleanup"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

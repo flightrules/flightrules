@@ -1,0 +1,14 @@
+{
+  "name": "git clean -fdx at the repo root is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "git clean -fdx"}
+  },
+  "fixture": {"files": {".git/HEAD": "ref: refs/heads/main\n"}},
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "git-clean-root"
+  }
+}

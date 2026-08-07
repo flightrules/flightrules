@@ -1,0 +1,13 @@
+{
+  "name": "rm with separate -r -f flags on $HOME is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -r -f $HOME"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "home directory"
+  }
+}

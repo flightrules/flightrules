@@ -1,0 +1,25 @@
+{
+  "name": "package.json scripts.lint autodetects npm run; failing script blocks",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-12"
+  },
+  "env": {
+    "FR_LINT_CMD": "",
+    "FR_STATE_DIR": "."
+  },
+  "fixture": {
+    "files": {
+      "package.json": "{\"name\": \"demo\", \"scripts\": {\"lint\": \"false\"}}"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "decision": "block"
+    },
+    "file_contains": {
+      "fr-lint-on-stop-sess-12.count": "1"
+    }
+  }
+}

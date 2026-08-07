@@ -1,0 +1,16 @@
+{
+  "name": "FR_NOTIFY_OFF=1 disables the hook entirely",
+  "stdin": {
+    "hook_event_name": "Notification",
+    "message": "you should never see this"
+  },
+  "env": {
+    "FR_NOTIFY_OFF": "1",
+    "FR_NOTIFY_CMD": "printf '%s' {message} > notify.txt"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true,
+    "file_absent": ["notify.txt"]
+  }
+}

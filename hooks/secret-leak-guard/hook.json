@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Grep|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/hooks/flightrules/secret-leak-guard.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

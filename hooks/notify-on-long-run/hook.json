@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/hooks/flightrules/notify-on-long-run.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

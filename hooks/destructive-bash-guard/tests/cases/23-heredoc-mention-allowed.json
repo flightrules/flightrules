@@ -1,0 +1,12 @@
+{
+  "name": "dangerous string inside a heredoc body is allowed",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "cat <<'EOF' > notes.md\nnever run rm -rf / on a server\nEOF"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

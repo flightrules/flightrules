@@ -1,0 +1,14 @@
+{
+  "name": "cp .env.example .env passes (no read verb)",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cp .env.example .env"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

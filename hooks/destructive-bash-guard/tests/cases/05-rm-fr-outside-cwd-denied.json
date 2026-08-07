@@ -1,0 +1,13 @@
+{
+  "name": "rm -fr on an absolute path outside the session cwd is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -fr /etc/nginx"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "outside the session working directory"
+  }
+}

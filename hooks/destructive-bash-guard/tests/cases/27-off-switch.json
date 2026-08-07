@@ -1,0 +1,13 @@
+{
+  "name": "FR_DESTRUCTIVE_GUARD_OFF=1 disables the guard",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -rf /"}
+  },
+  "env": {"FR_DESTRUCTIVE_GUARD_OFF": "1"},
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

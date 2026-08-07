@@ -1,0 +1,23 @@
+{
+  "name": "two prior blocks in this session: allow with warning, do not block",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-07"
+  },
+  "env": {
+    "FR_LINT_CMD": "false",
+    "FR_STATE_DIR": "."
+  },
+  "fixture": {
+    "files": {
+      "fr-lint-on-stop-sess-07.count": "2"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "decision": null
+    },
+    "stdout_contains": "allowing stop so the session does not loop"
+  }
+}

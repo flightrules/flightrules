@@ -1,0 +1,15 @@
+{
+  "name": "failing notify command still exits 0 with a stderr debug note",
+  "stdin": {
+    "hook_event_name": "Notification",
+    "message": "does the hook survive a broken notifier?"
+  },
+  "env": {
+    "FR_NOTIFY_CMD": "exit 7"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true,
+    "stderr_contains": "notify-on-long-run: notify command exited 7"
+  }
+}

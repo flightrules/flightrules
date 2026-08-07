@@ -1,0 +1,13 @@
+{
+  "name": "chmod -R 777 / is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "chmod -R 777 /"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "recursive-perms"
+  }
+}

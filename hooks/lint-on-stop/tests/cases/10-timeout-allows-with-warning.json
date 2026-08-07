@@ -1,0 +1,19 @@
+{
+  "name": "FR_LINT_TIMEOUT hit: allow the stop with a warning, no block",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-10"
+  },
+  "env": {
+    "FR_LINT_CMD": "sleep 2",
+    "FR_LINT_TIMEOUT": "1",
+    "FR_STATE_DIR": "."
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "decision": null
+    },
+    "stdout_contains": "did not finish within 1s"
+  }
+}

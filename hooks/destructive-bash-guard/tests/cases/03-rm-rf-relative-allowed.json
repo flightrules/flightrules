@@ -1,0 +1,12 @@
+{
+  "name": "rm -rf node_modules (relative, inside project) is allowed",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -rf node_modules"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

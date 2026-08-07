@@ -1,0 +1,13 @@
+{
+  "name": "sudo shutdown -h now is denied (wrapper stripped)",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "sudo shutdown -h now"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {"hookSpecificOutput.permissionDecision": "deny"},
+    "stdout_contains": "system-power"
+  }
+}

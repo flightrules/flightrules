@@ -1,0 +1,16 @@
+{
+  "name": "cwd without .git emits nothing",
+  "stdin": {
+    "hook_event_name": "SessionStart",
+    "source": "startup"
+  },
+  "fixture": {
+    "files": {
+      "README.md": "just a plain directory\n"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

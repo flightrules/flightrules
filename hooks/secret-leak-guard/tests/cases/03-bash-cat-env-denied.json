@@ -1,0 +1,16 @@
+{
+  "name": "Bash cat .env is denied",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat .env && echo done"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny"
+    }
+  }
+}

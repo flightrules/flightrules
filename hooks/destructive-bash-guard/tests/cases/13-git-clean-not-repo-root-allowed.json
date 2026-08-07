@@ -1,0 +1,12 @@
+{
+  "name": "git clean -fdx outside the repo root (no .git in cwd) is allowed",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "git clean -fdx"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

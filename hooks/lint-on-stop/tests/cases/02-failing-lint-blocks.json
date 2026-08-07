@@ -1,0 +1,21 @@
+{
+  "name": "failing lint blocks the stop with the lint output",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-02"
+  },
+  "env": {
+    "FR_LINT_CMD": "echo 'src/app.js:3:1 error no-unused-vars'; exit 1",
+    "FR_STATE_DIR": "."
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "decision": "block"
+    },
+    "stdout_contains": "no-unused-vars",
+    "file_contains": {
+      "fr-lint-on-stop-sess-02.count": "1"
+    }
+  }
+}

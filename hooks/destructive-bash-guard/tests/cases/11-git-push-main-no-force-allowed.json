@@ -1,0 +1,12 @@
+{
+  "name": "git push origin main without force is allowed",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "git push origin main"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

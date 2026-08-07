@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PROJECT_DIR}/.claude/hooks/flightrules/context-loader.py\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

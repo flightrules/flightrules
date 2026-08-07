@@ -1,0 +1,12 @@
+{
+  "name": "dd of=/dev/null (benchmark idiom) is allowed",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "dd if=./disk.img of=/dev/null bs=1M"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}
