@@ -1,0 +1,16 @@
+{
+  "name": "Denial text never tells the model how to disable the guard",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {"command": "rm -rf /"}
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny"
+    },
+    "stdout_contains": "FR_DESTRUCTIVE_ALLOW=rm-recursive-force",
+    "stdout_not_contains": ["FR_DESTRUCTIVE_GUARD_OFF", "GUARD_OFF"]
+  }
+}

@@ -21,9 +21,16 @@ logs downstream. This hook makes that a structured denial instead.
 
 | Env var | Effect |
 |---------|--------|
-| `FR_SECRET_GUARD_OFF=1` | disable entirely |
+| `FR_SECRET_GUARD_OFF=1` | disable entirely (operator only, see below) |
 | `FR_SECRET_EXTRA=glob:glob` | extra deny globs (basename) |
 | `FR_SECRET_ALLOW=glob:glob` | extra allow globs (basename) |
+
+**Why `FR_SECRET_GUARD_OFF=1` is not in the denial text:** the reason
+string is fed to the model, and a blocked agent reads it as
+instructions. An escape hatch named there gets taken, and one legitimate
+exception quietly becomes a permanently disabled guard. The denial names
+only the narrow, per-rule waiver (`FR_SECRET_ALLOW`) and asks the agent
+to route it through you; the blanket switch stays here, for humans.
 
 **Honest limitations:** this defends against accidents, not adversaries. An
 obfuscated command (`cat $(echo LmVudg== | base64 -d)`) evades the token

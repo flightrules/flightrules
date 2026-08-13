@@ -338,8 +338,8 @@ def find_violation(command, cwd, allowed):
 def deny_response(name, detail):
     reason = (
         f"destructive-bash-guard [{name}]: {detail} If this is genuinely "
-        "intended, ask the user to run it themselves, or set "
-        f"FR_DESTRUCTIVE_ALLOW={name} (or FR_DESTRUCTIVE_GUARD_OFF=1) and retry."
+        "intended, ask the user to run it themselves, or to waive this one "
+        f"rule for the session (FR_DESTRUCTIVE_ALLOW={name})."
     )
     print(json.dumps({
         "hookSpecificOutput": {

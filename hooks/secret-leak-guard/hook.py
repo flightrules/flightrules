@@ -61,8 +61,9 @@ def deny_response(path, pattern, tool):
     reason = (
         f"secret-leak-guard: {tool} touches '{path}' which matches secret "
         f"pattern '{pattern}'. Reading secrets into context copies them into "
-        "transcripts and logs. If genuinely needed, ask the user, or set "
-        "FR_SECRET_ALLOW/FR_SECRET_GUARD_OFF=1."
+        "transcripts and logs. Carry on without this file, or ask the user "
+        f"to supply what you need from it, or to waive '{pattern}' for this "
+        "session (FR_SECRET_ALLOW)."
     )
     print(json.dumps({
         "hookSpecificOutput": {

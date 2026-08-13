@@ -1,0 +1,17 @@
+{
+  "name": "Denial text never tells the model how to disable the guard",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {"file_path": "{CWD}/.env"}
+  },
+  "fixture": {"files": {".env": "API_KEY=supersecret"}},
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny"
+    },
+    "stdout_contains": "FR_SECRET_ALLOW",
+    "stdout_not_contains": ["FR_SECRET_GUARD_OFF", "GUARD_OFF"]
+  }
+}

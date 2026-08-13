@@ -21,6 +21,7 @@ Case file schema:
     "exit": 0,                                  // required
     "stdout_json": { "dot.path": "expected" },  // optional, deep-get match
     "stdout_contains": "substr",                // optional
+    "stdout_not_contains": ["substr", ...],     // optional, none may appear
     "stderr_contains": "substr",                // optional
     "stdout_empty": true,                       // optional
     "file_contains": { "rel/path": "substr" },  // optional, fixture dir post-run
@@ -97,6 +98,9 @@ def run_case(hook_dir, case_path):
         failures.append(f"stdout not empty: {proc.stdout.strip()[:200]}")
     if "stdout_contains" in exp and exp["stdout_contains"] not in proc.stdout:
         failures.append(f"stdout missing {exp['stdout_contains']!r}: {proc.stdout.strip()[:200]}")
+    for banned in exp.get("stdout_not_contains", []):
+        if banned in proc.stdout:
+            failures.append(f"stdout contains banned {banned!r}: {proc.stdout.strip()[:200]}")
     if "stderr_contains" in exp and exp["stderr_contains"] not in proc.stderr:
         failures.append(f"stderr missing {exp['stderr_contains']!r}: {proc.stderr.strip()[:200]}")
     if "stdout_json" in exp:

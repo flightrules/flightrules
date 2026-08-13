@@ -57,8 +57,14 @@ These guards stop accidents, not attackers. They parse tool input inside
 the same trust boundary as the agent, and an obfuscated command can evade
 them - each hook's README lists its own evasions. For adversarial threats,
 the real boundaries are Claude Code's permission system, sandboxing, and OS
-controls. The [full pack](https://flightrules.dev) includes a hardening
-guide mapping which layer actually stops what.
+controls; treat these hooks as the seatbelt, not the airbag.
+
+One design rule worth stealing even if you never install this: a denial
+reason is fed straight back to the model, so it must never name the
+guard's own kill switch. An agent that gets told "denied - or set
+`FR_SECRET_GUARD_OFF=1`" has just been handed the off switch at the one
+moment it is most motivated to use it. These hooks name only the narrow,
+per-rule waiver, and ask the agent to get it from you.
 
 ## The full pack
 

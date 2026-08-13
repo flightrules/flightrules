@@ -38,8 +38,16 @@ halted` does not match `halt`.
 
 | Env var | Effect |
 |---------|--------|
-| `FR_DESTRUCTIVE_GUARD_OFF=1` | disable entirely |
+| `FR_DESTRUCTIVE_GUARD_OFF=1` | disable entirely (operator only, see below) |
 | `FR_DESTRUCTIVE_ALLOW=name:name` | allow the named patterns above (colon-separated) |
+
+**Why `FR_DESTRUCTIVE_GUARD_OFF=1` is not in the denial text:** the
+reason string is fed to the model, and a blocked agent reads it as
+instructions. An escape hatch named there gets taken, and one legitimate
+exception quietly becomes a permanently disabled guard. The denial names
+only the narrow, per-rule waiver (`FR_DESTRUCTIVE_ALLOW=<rule>`) and
+asks the agent to route it through you; the blanket switch stays here,
+for humans.
 
 **Honest limitations:** this defends against accidents, not adversaries.
 Obfuscation (`rm -rf $(echo Lw== | base64 -d)`), variables (`X=/; rm -rf

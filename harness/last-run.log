@@ -1,0 +1,73 @@
+ok   context-loader :: branch comes from .git/HEAD even when git commands fail (PATH empty)
+ok   context-loader :: cwd without .git emits nothing
+ok   context-loader :: FR_CONTEXT_OFF=1 disables the loader
+ok   context-loader :: invalid JSON stdin exits 0 silently (fail open)
+ok   context-loader :: detached HEAD reported with short hash
+ok   context-loader :: dirty file count via real git on minimal repo (requires git on PATH)
+ok   context-loader :: .git pointer file (worktree/submodule) resolves to the real HEAD
+ok   context-loader :: branch names containing slashes survive HEAD parsing
+ok   context-loader :: stdin without cwd falls back to process cwd
+ok   destructive-bash-guard :: rm -rf / is denied with structured JSON
+ok   destructive-bash-guard :: rm with separate -r -f flags on $HOME is denied
+ok   destructive-bash-guard :: rm -rf node_modules (relative, inside project) is allowed
+ok   destructive-bash-guard :: rm -rf on an absolute path inside the session cwd is allowed
+ok   destructive-bash-guard :: rm -fr on an absolute path outside the session cwd is denied
+ok   destructive-bash-guard :: rm -r without -f does not match (both flags required)
+ok   destructive-bash-guard :: rm -rf on a path ending /* is denied
+ok   destructive-bash-guard :: git push --force origin main is denied
+ok   destructive-bash-guard :: git push -f origin HEAD:master (refspec form) is denied
+ok   destructive-bash-guard :: git push -f to a feature branch is allowed
+ok   destructive-bash-guard :: git push origin main without force is allowed
+ok   destructive-bash-guard :: git clean -fdx at the repo root is denied
+ok   destructive-bash-guard :: git clean -fdx outside the repo root (no .git in cwd) is allowed
+ok   destructive-bash-guard :: dd of=/dev/sda is denied
+ok   destructive-bash-guard :: dd of=/dev/null (benchmark idiom) is allowed
+ok   destructive-bash-guard :: mkfs.ext4 is denied
+ok   destructive-bash-guard :: sudo shutdown -h now is denied (wrapper stripped)
+ok   destructive-bash-guard :: 'echo halted' does not substring-match the halt pattern
+ok   destructive-bash-guard :: chmod -R 777 / is denied
+ok   destructive-bash-guard :: the :(){ fork bomb is denied
+ok   destructive-bash-guard :: redirection onto /dev/sda is denied
+ok   destructive-bash-guard :: quoted mention of a dangerous command is allowed
+ok   destructive-bash-guard :: dangerous string inside a heredoc body is allowed
+ok   destructive-bash-guard :: danger hidden behind && in a chained command is denied
+ok   destructive-bash-guard :: FR_DESTRUCTIVE_ALLOW skips the named pattern, others still fire
+ok   destructive-bash-guard :: FR_DESTRUCTIVE_ALLOW with the only matching pattern allows the command
+ok   destructive-bash-guard :: FR_DESTRUCTIVE_GUARD_OFF=1 disables the guard
+ok   destructive-bash-guard :: invalid JSON stdin exits 0 silently (fail open)
+ok   destructive-bash-guard :: Denial text never tells the model how to disable the guard
+ok   lint-on-stop :: passing lint (FR_LINT_CMD=true) allows the stop silently
+ok   lint-on-stop :: failing lint blocks the stop with the lint output
+ok   lint-on-stop :: no lint command detectable: allow silently, run nothing
+ok   lint-on-stop :: FR_LINT_OFF=1 disables the hook even with a failing lint
+ok   lint-on-stop :: invalid JSON stdin exits 0 silently (fail open)
+ok   lint-on-stop :: one prior block in this session: still blocks, counter reaches 2
+ok   lint-on-stop :: two prior blocks in this session: allow with warning, do not block
+ok   lint-on-stop :: passing lint resets the loop-guard counter
+ok   lint-on-stop :: loop-guard state is per session: another session's counter is ignored
+ok   lint-on-stop :: FR_LINT_TIMEOUT hit: allow the stop with a warning, no block
+ok   lint-on-stop :: block reason is truncated to the last 2000 chars of lint output
+ok   lint-on-stop :: package.json scripts.lint autodetects npm run; failing script blocks
+ok   lint-on-stop :: ruff.toml present but ruff binary not on PATH: allow silently
+ok   notify-on-long-run :: stdin message reaches the notify command with the fixed title
+ok   notify-on-long-run :: missing message field falls back to the default text
+ok   notify-on-long-run :: whitespace-only message falls back to the default text
+ok   notify-on-long-run :: non-string message field falls back to the default text
+ok   notify-on-long-run :: FR_NOTIFY_OFF=1 disables the hook entirely
+ok   notify-on-long-run :: invalid JSON stdin exits 0 silently, no notification fired (fail open)
+ok   notify-on-long-run :: no FR_NOTIFY_CMD and no notifier on PATH exits 0 silently
+ok   notify-on-long-run :: shell metacharacters in the message stay literal text
+ok   notify-on-long-run :: failing notify command still exits 0 with a stderr debug note
+ok   secret-leak-guard :: Read of .env is denied with structured JSON
+ok   secret-leak-guard :: .env.example passes silently
+ok   secret-leak-guard :: Bash cat .env is denied
+ok   secret-leak-guard :: cp .env.example .env passes (no read verb)
+ok   secret-leak-guard :: Read of a .pem key is denied
+ok   secret-leak-guard :: Bash grep in ~/.ssh/ is denied via path fragment
+ok   secret-leak-guard :: git status passes silently
+ok   secret-leak-guard :: FR_SECRET_GUARD_OFF=1 disables the guard
+ok   secret-leak-guard :: invalid JSON stdin exits 0 silently (fail open)
+ok   secret-leak-guard :: FR_SECRET_EXTRA adds custom deny glob
+ok   secret-leak-guard :: Denial text never tells the model how to disable the guard
+
+71/71 cases passed across 5 hooks
