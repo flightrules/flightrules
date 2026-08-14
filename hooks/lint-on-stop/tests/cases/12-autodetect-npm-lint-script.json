@@ -6,18 +6,22 @@
   },
   "env": {
     "FR_LINT_CMD": "",
-    "FR_STATE_DIR": "."
+    "FR_STATE_DIR": ".",
+    "PATH": "{CWD}/bin"
   },
   "fixture": {
     "files": {
-      "package.json": "{\"name\": \"demo\", \"scripts\": {\"lint\": \"false\"}}"
-    }
+      "package.json": "{\"name\": \"demo\", \"scripts\": {\"lint\": \"eslint .\"}}",
+      "bin/npm": "#!/bin/sh\necho 'app.js:1:1  error  Unexpected var' >&2\nexit 1\n"
+    },
+    "executable": ["bin/npm"]
   },
   "expect": {
     "exit": 0,
     "stdout_json": {
       "decision": "block"
     },
+    "stdout_contains": "Unexpected var",
     "file_contains": {
       "fr-lint-on-stop-sess-12.count": "1"
     }

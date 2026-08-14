@@ -15,8 +15,11 @@ Case file schema:
   "name": "human-readable case name",
   "stdin": { ... hook stdin JSON; "{CWD}" in strings -> fixture dir ... },
   "stdin_raw": "literal stdin string (alternative to stdin, e.g. bad JSON)",
-  "env": { "FR_SOMETHING": "1" },              // optional
-  "fixture": { "files": { "rel/path": "content" } },  // optional temp dir
+  "env": { "FR_SOMETHING": "1" },              // optional, "{CWD}" resolves
+  "fixture": {
+    "files": { "rel/path": "content" },        // optional temp dir
+    "executable": ["rel/path"]                 // optional, chmod 0755
+  },
   "expect": {
     "exit": 0,                                  // required
     "stdout_json": { "dot.path": "expected" },  // optional, deep-get match
@@ -63,10 +66,21 @@ def run_case(hook_dir, case_path):
     case = json.loads(case_path.read_text())
     failures = []
     with tempfile.TemporaryDirectory(prefix="fr-harness-") as tmp:
-        for rel, content in case.get("fixture", {}).get("files", {}).items():
+        fixture = case.get("fixture", {})
+        for rel, content in fixture.get("files", {}).items():
             p = Path(tmp) / rel
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(content)
+        # Cases that stub an external binary (a fake npm on a pinned PATH,
+        # say) need it executable. Keeping the stub inside the fixture is
+        # what makes those cases hermetic: they assert the same thing on a
+        # machine that has the real tool and on one that does not.
+        for rel in fixture.get("executable", []):
+            p = Path(tmp) / rel
+            if not p.is_file():
+                failures.append(f"fixture.executable names a missing file: {rel}")
+                continue
+            p.chmod(0o755)
         if "stdin_raw" in case:
             stdin_text = case["stdin_raw"]
         else:
@@ -74,7 +88,9 @@ def run_case(hook_dir, case_path):
             stdin_obj.setdefault("cwd", tmp)
             stdin_text = json.dumps(stdin_obj)
         env = dict(os.environ)
-        env.update(case.get("env", {}))
+        # {CWD} resolves in env too, so a case can point PATH at its own
+        # fixture directory.
+        env.update(substitute(case.get("env", {}), tmp))
         proc = subprocess.run(
             [sys.executable, str(hook_dir / "hook.py")],
             input=stdin_text,

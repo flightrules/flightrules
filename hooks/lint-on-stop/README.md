@@ -10,7 +10,8 @@ before handing back.
 **Command resolution** (first match wins):
 
 1. `FR_LINT_CMD` if set (run via shell in the session cwd)
-2. `package.json` with a `scripts.lint` entry -> `npm run -s lint`
+2. `package.json` with a `scripts.lint` entry, and the `npm` binary on
+   PATH -> `npm run -s lint`
 3. `pyproject.toml` containing `[tool.ruff`, or a `ruff.toml`, and the
    `ruff` binary on PATH -> `ruff check .`
 4. nothing found -> allow silently, run nothing
@@ -37,6 +38,12 @@ A passing lint run resets the counter.
 session cwd with no sandboxing - your lint script is executed as-is, so
 treat lint config as code. Autodetection is deliberately narrow (npm
 `scripts.lint`, ruff); monorepos and other linters need `FR_LINT_CMD`.
+Both autodetected commands require their binary on PATH, which is checked
+rather than assumed: under `shell=True` a missing binary is exit 127, not
+an exception, and reporting `npm: not found` to the model as a lint
+failure would block the stop over nothing. Worth knowing if you use nvm,
+since it loads in interactive shells and a hook subprocess is not one -
+set `FR_LINT_CMD` to an absolute path if you want lint to run there.
 The lint run adds its full duration to every stop - keep it fast or cap
 it with `FR_LINT_TIMEOUT` (a timeout allows the stop with a warning, it
 does not block). Only the command's exit code is consulted; a linter that

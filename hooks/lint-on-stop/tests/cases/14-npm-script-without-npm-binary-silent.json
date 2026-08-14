@@ -1,0 +1,21 @@
+{
+  "name": "package.json scripts.lint present but npm not on PATH: allow silently",
+  "stdin": {
+    "hook_event_name": "Stop",
+    "session_id": "sess-14"
+  },
+  "env": {
+    "FR_LINT_CMD": "",
+    "FR_STATE_DIR": ".",
+    "PATH": "/nonexistent-fr-test"
+  },
+  "fixture": {
+    "files": {
+      "package.json": "{\"name\": \"demo\", \"scripts\": {\"lint\": \"eslint .\"}}"
+    }
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_empty": true
+  }
+}

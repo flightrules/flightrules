@@ -59,7 +59,13 @@ def detect_command(cwd):
         try:
             with open(pkg) as f:
                 scripts = (json.load(f) or {}).get("scripts") or {}
-            if "lint" in scripts:
+            # shutil.which("npm") matters more than it looks: the command
+            # runs under shell=True, so a missing npm is not an error we
+            # catch, it is exit 127 with "npm: not found" on stderr, which
+            # this hook would then report to the model as a lint failure and
+            # block the stop over. nvm users hit exactly this - nvm loads in
+            # interactive shells, and a hook subprocess is not one.
+            if "lint" in scripts and shutil.which("npm"):
                 return "npm run -s lint"
         except (OSError, ValueError, AttributeError):
             pass  # unreadable package.json: keep detecting, do not crash

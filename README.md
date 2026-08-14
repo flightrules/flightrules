@@ -1,5 +1,7 @@
 # FlightRules free tier
 
+[![tests](https://github.com/flightrules/flightrules/actions/workflows/tests.yml/badge.svg)](https://github.com/flightrules/flightrules/actions/workflows/tests.yml)
+
 Five tested guardrail hooks for [Claude Code](https://code.claude.com), MIT
 licensed. Each one is plain Python 3 stdlib wired into Claude Code's native
 hook mechanism - no wrapper, no daemon, no dependencies.
@@ -11,6 +13,28 @@ hook mechanism - no wrapper, no daemon, no dependencies.
 | `lint-on-stop` | Stop | Runs your linter when Claude tries to finish and feeds failures back for self-correction (max 2 loops per session) |
 | `context-loader` | SessionStart | Injects branch, recent commits, and dirty-file count, so every session skips the "what branch am I on" ritual |
 | `notify-on-long-run` | Notification | Turns Claude Code's in-terminal notifications into desktop alerts, so long runs don't sit unnoticed |
+
+## What a block looks like
+
+Hooks speak Claude Code's JSON protocol on stdin and stdout, so you can run
+one by hand without installing anything:
+
+```console
+$ echo '{"tool_name":"Bash","tool_input":{"command":"cat .env | grep KEY"}}' \
+    | python3 hooks/secret-leak-guard/hook.py | python3 -m json.tool
+{
+    "hookSpecificOutput": {
+        "hookEventName": "PreToolUse",
+        "permissionDecision": "deny",
+        "permissionDecisionReason": "secret-leak-guard: Bash touches '.env' which matches secret pattern '.env'. Reading secrets into context copies them into transcripts and logs. Carry on without this file, or ask the user to supply what you need from it, or to waive '.env' for this session (FR_SECRET_ALLOW)."
+    }
+}
+```
+
+The reason string is what Claude actually receives, which is why it is
+written to be acted on rather than just logged: it says what to do instead,
+and the waiver it names is scoped to one pattern (see
+[Honest limitations](#honest-limitations) for why that detail matters).
 
 ## Install
 
@@ -31,17 +55,24 @@ hook's own README (`hooks/<name>/README.md`).
 
 ## Tested, and you can check
 
-Every hook ships with its test cases in `hooks/<name>/tests/cases/`. Run
-them all in seconds, no network, no API key:
+72 cases across the five hooks, plus the installer's own suite. Each case is
+a JSON file in `hooks/<name>/tests/cases/` naming the input, the expected
+exit code, and the expected output. They run in seconds, with no network and
+no API key:
 
 ```bash
-python3 harness/run.py            # all hooks
+python3 harness/run.py            # 72/72 cases across 5 hooks
 python3 harness/test_install.py   # the installer itself
 ```
 
+The badge above is that same pair of commands, run by GitHub on a clean
+machine against Python 3.9, 3.11, and 3.13 on Linux and macOS, on every
+push and once a week. `harness/last-run.log` is the full case-by-case output
+of the run that shipped this exact tree, so you can diff yours against it.
+
 The same hooks also pass a live tier-2 suite (real headless Claude Code
-sessions against fixture repos) before every release of the
-[full pack](https://flightrules.dev).
+sessions against fixture repos, asserting side effects a model cannot fake)
+before every release of the [full pack](https://flightrules.dev).
 
 ## Design contract
 

@@ -49,6 +49,7 @@ ok   lint-on-stop :: FR_LINT_TIMEOUT hit: allow the stop with a warning, no bloc
 ok   lint-on-stop :: block reason is truncated to the last 2000 chars of lint output
 ok   lint-on-stop :: package.json scripts.lint autodetects npm run; failing script blocks
 ok   lint-on-stop :: ruff.toml present but ruff binary not on PATH: allow silently
+ok   lint-on-stop :: package.json scripts.lint present but npm not on PATH: allow silently
 ok   notify-on-long-run :: stdin message reaches the notify command with the fixed title
 ok   notify-on-long-run :: missing message field falls back to the default text
 ok   notify-on-long-run :: whitespace-only message falls back to the default text
@@ -70,4 +71,4 @@ ok   secret-leak-guard :: invalid JSON stdin exits 0 silently (fail open)
 ok   secret-leak-guard :: FR_SECRET_EXTRA adds custom deny glob
 ok   secret-leak-guard :: Denial text never tells the model how to disable the guard
 
-71/71 cases passed across 5 hooks
+72/72 cases passed across 5 hooks
