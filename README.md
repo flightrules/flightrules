@@ -55,13 +55,13 @@ hook's own README (`hooks/<name>/README.md`).
 
 ## Tested, and you can check
 
-72 cases across the five hooks, plus the installer's own suite. Each case is
+75 cases across the five hooks, plus the installer's own suite. Each case is
 a JSON file in `hooks/<name>/tests/cases/` naming the input, the expected
 exit code, and the expected output. They run in seconds, with no network and
 no API key:
 
 ```bash
-python3 harness/run.py            # 72/72 cases across 5 hooks
+python3 harness/run.py            # 75/75 cases across 5 hooks
 python3 harness/test_install.py   # the installer itself
 ```
 

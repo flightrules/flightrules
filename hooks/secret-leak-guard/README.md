@@ -22,8 +22,21 @@ logs downstream. This hook makes that a structured denial instead.
 | Env var | Effect |
 |---------|--------|
 | `FR_SECRET_GUARD_OFF=1` | disable entirely (operator only, see below) |
-| `FR_SECRET_EXTRA=glob:glob` | extra deny globs (basename) |
-| `FR_SECRET_ALLOW=glob:glob` | extra allow globs (basename) |
+| `FR_SECRET_EXTRA=rule:rule` | extra deny rules |
+| `FR_SECRET_ALLOW=rule:rule` | extra allow rules |
+
+A rule without a `/` is a glob matched against the basename
+(`prod-config.*`); a rule with a `/` is a path fragment matched anywhere
+in the path (`.vscode/settings.json`, `.config/gh/`). Path rules exist for
+files that look boring but carry tokens on *your* machine or project:
+compose overrides, editor settings JSON, tool cache and config dirs. They
+are deliberately not in the default list, because agents legitimately
+edit those files in most repos, and a guard that blocks routine work gets
+switched off. Add them per project:
+
+```
+FR_SECRET_EXTRA="docker-compose.override.yml:.vscode/settings.json:.config/gh/"
+```
 
 **Why `FR_SECRET_GUARD_OFF=1` is not in the denial text:** the reason
 string is fed to the model, and a blocked agent reads it as

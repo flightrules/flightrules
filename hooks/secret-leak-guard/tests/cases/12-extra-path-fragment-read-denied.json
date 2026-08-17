@@ -1,0 +1,20 @@
+{
+  "name": "FR_SECRET_EXTRA entry with a slash is a path fragment (Read)",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "{CWD}/.vscode/settings.json"
+    }
+  },
+  "env": {
+    "FR_SECRET_EXTRA": ".vscode/settings.json:docker-compose.override.yml"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny"
+    },
+    "stdout_contains": "pattern '.vscode/settings.json'"
+  }
+}

@@ -70,5 +70,8 @@ ok   secret-leak-guard :: FR_SECRET_GUARD_OFF=1 disables the guard
 ok   secret-leak-guard :: invalid JSON stdin exits 0 silently (fail open)
 ok   secret-leak-guard :: FR_SECRET_EXTRA adds custom deny glob
 ok   secret-leak-guard :: Denial text never tells the model how to disable the guard
+ok   secret-leak-guard :: FR_SECRET_EXTRA entry with a slash is a path fragment (Read)
+ok   secret-leak-guard :: FR_SECRET_EXTRA path fragment applies to Bash tokens too
+ok   secret-leak-guard :: FR_SECRET_ALLOW entry with a slash waives a default path fragment
 
-72/72 cases passed across 5 hooks
+75/75 cases passed across 5 hooks

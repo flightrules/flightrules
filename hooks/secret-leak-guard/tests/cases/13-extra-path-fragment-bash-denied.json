@@ -1,0 +1,19 @@
+{
+  "name": "FR_SECRET_EXTRA path fragment applies to Bash tokens too",
+  "stdin": {
+    "hook_event_name": "PreToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "cat ~/.config/gh/hosts.yml"
+    }
+  },
+  "env": {
+    "FR_SECRET_EXTRA": ".config/gh/"
+  },
+  "expect": {
+    "exit": 0,
+    "stdout_json": {
+      "hookSpecificOutput.permissionDecision": "deny"
+    }
+  }
+}
